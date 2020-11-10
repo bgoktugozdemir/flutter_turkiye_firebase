@@ -1,8 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-
-//TODO: final FirebaseAuth _auth = FirebaseAuth.instance;
 
 /// Email / Şifre ile kayıt sayfası
 class RegisterPage extends StatefulWidget {
@@ -11,7 +8,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -65,7 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       backgroundColor: Colors.blueGrey,
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
-                          _register();
+                          // TODO: Kayıt İşlemi
                         }
                       },
                       text: "Kayıt ol",
@@ -91,33 +87,5 @@ class _RegisterPageState extends State<RegisterPage> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
-  }
-
-  // Kayıt işlemi için
-  void _register() async {
-    try {
-      final User user = (await _auth.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      ))
-          .user;
-      if (user != null) {
-        setState(() {
-          _success = true;
-          _message = "Kayıt başarılı ${user.email}";
-        });
-      } else {
-        setState(() {
-          _success = false;
-          _message = "Kayıt başarısız.";
-        });
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-      setState(() {
-        _success = false;
-        _message = "Kayıt başarısız.\n\n$e";
-      });
-    }
   }
 }

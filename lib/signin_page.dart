@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_turkiye/home_page.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
-import 'utils.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -37,8 +34,6 @@ class __SignInBodyState extends State<_SignInBody> {
     return Container(
       child: ListView(
         padding: const EdgeInsets.all(8.0),
-        // Default hali zaten vertical olduğu için yazmaya gerek yok
-        scrollDirection: Axis.vertical,
         children: [
           //? Email / Şifre ile giriş
           _EmailPasswordForm(),
@@ -46,81 +41,17 @@ class __SignInBodyState extends State<_SignInBody> {
           _SignInProvider(
             infoText: "Google ile giriş yap",
             buttonType: Buttons.Google,
-            signInMethod: () async => _signInWithGoogle(),
+            signInMethod: () async => {}, // TODO: Google ile giriş
           ),
           //? Anonim giriş
           _SignInProvider(
             infoText: "Anonim giriş yap",
             buttonType: Buttons.AppleDark,
-            signInMethod: () async => _signInAnonymously(),
+            signInMethod: () async => {}, // TODO: Anonim giriş
           ),
         ],
       ),
     );
-  }
-
-  void _signInAnonymously() async {
-    try {
-      final User user = (await _auth.signInAnonymously()).user;
-      Utils.showSnackBar(context,
-          text: "Anonim olarak giriş yapıldı: ${user.uid}");
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
-    } catch (e) {
-      debugPrint(e.toString());
-      Scaffold.of(context).showSnackBar(
-          SnackBar(content: Text("Anonim giriş yaparken bir hata oluştu")));
-    }
-  }
-
-  void _signInWithGoogle() async {
-    try {
-      final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-      final GoogleAuthCredential googleAuthCredential =
-          GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      final UserCredential userCredential =
-          await _auth.signInWithCredential(googleAuthCredential);
-      final user = userCredential.user;
-
-      Scaffold.of(context).showSnackBar(
-        SnackBar(
-          content: Text("${user.displayName}, Google ile giriş yaptı."),
-        ),
-      );
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
-    } on FirebaseAuthException catch (e) {
-      debugPrint(e.toString());
-
-      Scaffold.of(context).showSnackBar(
-        SnackBar(
-          content: Text("${e.message}"),
-        ),
-      );
-    } catch (e) {
-      debugPrint(e.toString());
-
-      Scaffold.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Google ile giriş yaparken bir hata oluştu!"),
-        ),
-      );
-    }
   }
 }
 
@@ -177,7 +108,7 @@ class __EmailPasswordFormState extends State<_EmailPasswordForm> {
                 child: SignInButton(Buttons.Email, text: "Email ile giriş yap",
                     onPressed: () async {
                   if (_formKey.currentState.validate()) {
-                    _signInWithEmailAndPassword();
+                    // TODO: Email ile giriş
                   }
                 }),
               ),
@@ -186,38 +117,6 @@ class __EmailPasswordFormState extends State<_EmailPasswordForm> {
         ),
       ),
     );
-  }
-
-  /// [Email] ve [Password] ile kullanıcı girişi yapar.
-  void _signInWithEmailAndPassword() async {
-    try {
-      final User user = (await _auth.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      ))
-          .user;
-
-      Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text("${user.email} ile giriş yapıldı."),
-      ));
-    } on FirebaseAuthException catch (e) {
-      debugPrint(e.toString());
-      Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text("${e.message}"),
-      ));
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
-    } catch (e) {
-      debugPrint(e.toString());
-      Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text("Email & Şifre ile giriş yaparken bir sorun oluştu"),
-      ));
-    }
   }
 }
 
