@@ -2,8 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
-//TODO: final FirebaseAuth _auth = FirebaseAuth.instance;
-
 /// Email / Şifre ile kayıt sayfası
 class RegisterPage extends StatefulWidget {
   @override

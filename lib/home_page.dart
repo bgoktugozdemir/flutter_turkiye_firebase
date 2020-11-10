@@ -6,13 +6,12 @@ import 'package:flutter_turkiye/signin_page.dart';
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class HomePage extends StatelessWidget {
+  // Eskiden Firestore'du.
   final Query query = FirebaseFirestore.instance
       .collection("movies")
       .orderBy('year', descending: true);
-
   @override
   Widget build(BuildContext context) {
-    // Eskiden Firestore'du.
     return Scaffold(
       appBar: AppBar(
         title: Text("Cloud Firestore"),
