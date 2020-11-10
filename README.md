@@ -9,7 +9,8 @@ Eğitim sırasında eş zamanlı gitmek istiyorsanız [başlangıç projesini](h
 
 Firebase bağlantısını yapıp **google-services.json** dosyasını **android/app/** altına eklemeyi unutmayın.
 
-## Yayını kaçıranlar için
+## Yayın ve Kayıdı
 
 Canlı yayına [bu bağlantıya](https://www.youtube.com/watch?v=4Vf6_qNhpXc) tıklayarak ulaşabilirsiniz.
+
 Yayını kaçıranlar [bu bağlantı](https://www.youtube.com/watch?v=4Vf6_qNhpXc) üzerinden yayının tekrarını izleyebilir.
