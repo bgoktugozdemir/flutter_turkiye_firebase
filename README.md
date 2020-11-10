@@ -9,6 +9,10 @@ Eğitim sırasında eş zamanlı gitmek istiyorsanız [başlangıç projesini](h
 
 Firebase bağlantısını yapıp **google-services.json** dosyasını **android/app/** altına eklemeyi unutmayın.
 
+## Bazı Komutlar
+SHA1 İmza
+* ```keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android```
+
 ## Yayın ve Kayıdı
 
 Canlı yayına [bu bağlantıya](https://www.youtube.com/watch?v=4Vf6_qNhpXc) tıklayarak ulaşabilirsiniz.
