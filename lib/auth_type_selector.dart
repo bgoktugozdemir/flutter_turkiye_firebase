@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_builder.dart';
-import 'package:flutter_turkiye/signin_page.dart';
 
 import 'register_page.dart';
+import 'signin_page.dart';
 
 /// Bir kimlik doğrulama türü [Authentication Type] seçmek için
 /// bir UI [User Interface] sağlar.
